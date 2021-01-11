@@ -1,4 +1,5 @@
 ﻿using GraceUploadAPI.APIModules;
+using GraceUploadAPI.Methods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace GraceUploadAPI.Protocols.State
     }
     public class State
     {
+        public APIMethod APIMethod = new APIMethod();
         public StateData StateData { get; set; }
         /// <summary>
         /// 軟體初始化旗標
@@ -42,7 +44,12 @@ namespace GraceUploadAPI.Protocols.State
                         StateNo = StateNo,
                         CaseNo = StateData.CaseNo,
                     };
-                    StateData.StateModules.Add(stateModule);
+                    if (FirstFlag)
+                    {
+                        APIMethod.Send_State(stateModule);
+                    }
+                    APIMethod.Send_State_Web(stateModule);
+                    //StateData.StateModules.Add(stateModule);
                 }
             }
         }

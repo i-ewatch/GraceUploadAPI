@@ -51,7 +51,7 @@ namespace GraceUploadAPI.Components
             while (myWorkState)
             {
                 TimeSpan timeSpan = DateTime.Now.Subtract(ReadTime);
-                if (timeSpan.TotalSeconds >= 5)
+                if (timeSpan.TotalSeconds >= 1)
                 {
                     try
                     {
@@ -59,8 +59,8 @@ namespace GraceUploadAPI.Components
                         {
                             ModbusMaster ModbusMaster = ModbusIpMaster.CreateIp(tcp);
                             ModbusMaster.Transport.Retries = 3;
-                            ModbusMaster.Transport.ReadTimeout = 500;
-                            ModbusMaster.Transport.WriteTimeout = 500;
+                            ModbusMaster.Transport.ReadTimeout = 1000;
+                            ModbusMaster.Transport.WriteTimeout = 1000;
                             foreach (var item in AbsProtocols)
                             {
                                 item.ReadData(GateWaySetting.Gateways[0].Devices, ModbusMaster);

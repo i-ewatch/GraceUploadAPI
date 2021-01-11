@@ -26,9 +26,37 @@ namespace GraceUploadAPI.Methods
             }
             //Console.WriteLine(response.Content);
         }
+        public void Send_State(StateModule stateModules)
+        {
+            var client = new RestClient("http://ewatchapi.ai64.igrand.com.tw/api/State");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", JsonConvert.SerializeObject(stateModules), ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            if (response.StatusDescription != "OK")
+            {
+                Log.Error(response.Content);
+            }
+            //Console.WriteLine(response.Content);
+        }
         public void Send_State_Web_Multiple(List<StateModule> stateModules)
         {
             var client = new RestClient("http://ewatchapi.ai64.igrand.com.tw/api/StateWeb/Multiple");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", JsonConvert.SerializeObject(stateModules), ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            if (response.StatusDescription != "OK")
+            {
+                Log.Error(response.Content);
+            }
+            //Console.WriteLine(response.Content);
+        }
+        public void Send_State_Web(StateModule stateModules)
+        {
+            var client = new RestClient("http://ewatchapi.ai64.igrand.com.tw/api/StateWeb");
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/json");

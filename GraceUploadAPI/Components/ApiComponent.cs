@@ -36,6 +36,10 @@ namespace GraceUploadAPI.Components
         /// 初始旗標
         /// </summary>
         private bool FirstFlag { get; set; } = false;
+        /// <summary>
+        /// 最後上傳分鐘
+        /// </summary>
+        private int Minute = -1;
         public DateTime AITime { get; set; }
         protected override void AfterMyWorkStateChanged(object sender, EventArgs e)
         {
@@ -61,27 +65,30 @@ namespace GraceUploadAPI.Components
                 {
                     try
                     {
-                        TimeSpan AItimespan = DateTime.Now.Subtract(AITime);
-                        if (AI64Module != null && AItimespan.TotalSeconds >=60)
+                        //TimeSpan AItimespan = DateTime.Now.Subtract(AITime);
+                        //if (AI64Module != null && AItimespan.TotalSeconds >=60)
+                        if(AI64Module !=null && DateTime.Now.Minute != Minute)
                         {
+                            Minute = DateTime.Now.Minute;
+                            AI64Module.ttime = DateTime.Now.ToString("yyyyMMddHHmmss");
                             ErrorStr = "AI上傳發生錯誤";
                             APIMethod.Send_AI(AI64Module);
                             AITime = DateTime.Now;
                         }
-                        if (StateModules.Count > 0)
-                        {
-                            ErrorStr = "狀態上傳發生錯誤";
-                            if (FirstFlag)
-                            {
-                                APIMethod.Send_State_Multiple(StateModules);
-                            }
-                            else
-                            {
-                                APIMethod.Send_State_Web_Multiple(StateModules);
-                                FirstFlag = true;
-                            }
-                            StateModules.Clear();
-                        }
+                        //if (StateModules.Count > 0)
+                        //{
+                        //    ErrorStr = "狀態上傳發生錯誤";
+                        //    if (FirstFlag)
+                        //    {
+                        //        APIMethod.Send_State_Multiple(StateModules);
+                        //    }
+                        //    else
+                        //    {
+                        //        APIMethod.Send_State_Web_Multiple(StateModules);
+                        //        FirstFlag = true;
+                        //    }
+                        //    StateModules.Clear();
+                        //}
                         ReadTime = DateTime.Now;
                     }
                     catch (ThreadAbortException) { }
