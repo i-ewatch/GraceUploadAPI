@@ -66,7 +66,14 @@ namespace GraceUploadAPI.Components
                                 item.ReadData(GateWaySetting.Gateways[0].Devices, ModbusMaster);
                                 Thread.Sleep(10);
                             }
-                            AI64Module = ((AiProtocol)AbsProtocols[0]).AI64Module;
+                            if (AbsProtocols[0].ConnectionFlag)
+                            {
+                                AI64Module = ((AiProtocol)AbsProtocols[0]).AI64Module;
+                            }
+                            else
+                            {
+                                AI64Module = null;
+                            }
                             StateModules = ((StateProtocol)AbsProtocols[1]).StateModules;
                             ReadTime = DateTime.Now;
                         }

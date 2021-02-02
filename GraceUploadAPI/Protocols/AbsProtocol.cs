@@ -11,6 +11,10 @@ namespace GraceUploadAPI.Protocols
 {
     public abstract class AbsProtocol
     {
+        /// <summary>
+        /// 連線旗標
+        /// </summary>
+        public bool ConnectionFlag { get; set; }
         public MathClass MathClass { get; set; } = new MathClass();
         /// <summary>
         /// 案場編號

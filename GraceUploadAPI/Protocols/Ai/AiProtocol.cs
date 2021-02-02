@@ -82,6 +82,7 @@ namespace GraceUploadAPI.Protocols.Ai
             }
             catch (Exception ex)
             {
+                ConnectionFlag = false;
                 Log.Error(ex,$"AI數值第一部分讀取錯誤 ID: {devices[DeviceIndex].ID}");
             }
             #endregion
@@ -107,9 +108,11 @@ namespace GraceUploadAPI.Protocols.Ai
                 AI64Module.Ai56 = Convert.ToDecimal(MathClass.work16to754(Part2Value1[Index + 1], Part2Value1[Index])); Index += 2;
                 AI64Module.Ai57 = Convert.ToDecimal(MathClass.work16to754(Part2Value1[Index + 1], Part2Value1[Index])); Index += 2;
                 AI64Module.Ai58 = Convert.ToDecimal(MathClass.work16to754(Part2Value1[Index + 1], Part2Value1[Index]));
+                ConnectionFlag = true;
             }
             catch (Exception ex) 
             {
+                ConnectionFlag = false;
                 Log.Error(ex, $"AI數值第二部分讀取錯誤 ID: {devices[DeviceIndex].ID}");
             }
             #endregion
