@@ -45,6 +45,7 @@ namespace GraceUploadAPI.Components
         {
             if (myWorkState)
             {
+                APIMethod.APISetting = APISetting;
                 ReadThread = new Thread(Analysis);
                 ReadThread.Start();
             }

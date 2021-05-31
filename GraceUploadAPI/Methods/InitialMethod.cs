@@ -65,5 +65,38 @@ namespace GraceUploadAPI.Methods
             }
             return setting;
         }
+        public static APISetting APILoad()
+        {
+            APISetting setting = null;
+            if (!Directory.Exists($"{MyWorkPath}\\stf"))
+                Directory.CreateDirectory($"{MyWorkPath}\\stf");
+            string SettingPath = $"{MyWorkPath}\\stf\\API.json";
+            try
+            {
+                if (File.Exists(SettingPath))
+                {
+                    string json = File.ReadAllText(SettingPath, Encoding.UTF8);
+                    setting = JsonConvert.DeserializeObject<APISetting>(json);
+                }
+                else
+                {
+                    APISetting Setting = new APISetting()
+                    {
+                        APIAddress ={
+                            "http://ewatchapi.ai64.igrand.com.tw",
+                            "http://220.130.205.123:1000/"
+                        }
+                    };
+                    setting = Setting;
+                    string output = JsonConvert.SerializeObject(setting, Formatting.Indented, new JsonSerializerSettings());
+                    File.WriteAllText(SettingPath, output);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, " Gateway資訊設定載入錯誤");
+            }
+            return setting;
+        }
     }
 }

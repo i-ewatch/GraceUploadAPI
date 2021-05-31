@@ -94,6 +94,7 @@
     <Compile Include="Components\TcpComponent.Designer.cs">
       <DependentUpon>TcpComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\APISetting.cs" />
     <Compile Include="Configuration\GatewaySetting.cs" />
     <Compile Include="Enums\AiTypeEnum.cs" />
     <Compile Include="Enums\GatewayTypeEnum.cs" />

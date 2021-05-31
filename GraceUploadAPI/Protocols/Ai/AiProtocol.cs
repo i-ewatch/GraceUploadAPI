@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GraceUploadAPI.Protocols.Ai
@@ -80,6 +81,7 @@ namespace GraceUploadAPI.Protocols.Ai
                 AI64Module.Ai48 = Convert.ToDecimal(MathClass.work16to754(Part1Value2[Index + 1], Part1Value2[Index]));
                 DeviceIndex++;
             }
+            catch (ThreadAbortException) { }
             catch (Exception ex)
             {
                 ConnectionFlag = false;
@@ -110,6 +112,7 @@ namespace GraceUploadAPI.Protocols.Ai
                 AI64Module.Ai58 = Convert.ToDecimal(MathClass.work16to754(Part2Value1[Index + 1], Part2Value1[Index]));
                 ConnectionFlag = true;
             }
+            catch (ThreadAbortException) { }
             catch (Exception ex) 
             {
                 ConnectionFlag = false;

@@ -31,9 +31,9 @@ namespace GraceUploadAPI.Components
         {
             if (myWorkState)
             {
-                AiProtocol aiProtocol = new AiProtocol() { CaseNo = GateWaySetting.CaseNo };
+                AiProtocol aiProtocol = new AiProtocol() { CaseNo = GateWaySetting.CaseNo, APISetting = APISetting };
                 AbsProtocols.Add(aiProtocol);
-                StateProtocol stateProtocol = new StateProtocol() { CaseNo = GateWaySetting.CaseNo };
+                StateProtocol stateProtocol = new StateProtocol() { CaseNo = GateWaySetting.CaseNo, APISetting = APISetting };
                 AbsProtocols.Add(stateProtocol);
                 ReadThread = new Thread(Analysis);
                 ReadThread.Start();

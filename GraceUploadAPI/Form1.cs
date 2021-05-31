@@ -18,6 +18,10 @@ namespace GraceUploadAPI
     public partial class Form1 : Form
     {
         /// <summary>
+        /// API發送資訊
+        /// </summary>
+        private APISetting APISetting { get; set; }
+        /// <summary>
         /// 通訊資訊
         /// </summary>
         private GatewaySetting GatewaySetting { get; set; }
@@ -41,6 +45,7 @@ namespace GraceUploadAPI
             .CreateLogger();        //宣告Serilog初始化
 
             GatewaySetting = InitialMethod.GatewayLoad();
+            APISetting = InitialMethod.APILoad();
             if (GatewaySetting != null)
             {
                 foreach (var item in GatewaySetting.Gateways)
@@ -50,14 +55,14 @@ namespace GraceUploadAPI
                     {
                         case GatewayTypeEnum.ModbusRTU:
                             {
-                                SerialportComponent component = new SerialportComponent() { GateWaySetting = GatewaySetting };
+                                SerialportComponent component = new SerialportComponent() { GateWaySetting = GatewaySetting, APISetting = APISetting };
                                 component.MyWorkState = true;
                                 Field4Components.Add(component);
                             }
                             break;
                         case GatewayTypeEnum.ModbusTCP:
                             {
-                                TcpComponent component = new TcpComponent() { GateWaySetting = GatewaySetting };
+                                TcpComponent component = new TcpComponent() { GateWaySetting = GatewaySetting, APISetting = APISetting };
                                 component.MyWorkState = true;
                                 Field4Components.Add(component);
                             }
@@ -65,6 +70,7 @@ namespace GraceUploadAPI
                     }
                 }
                 ApiComponent = new ApiComponent();
+                ApiComponent.APISetting = APISetting;
                 ApiComponent.MyWorkState = true;
                 timer1.Interval = 1000;
                 timer1.Enabled = true;

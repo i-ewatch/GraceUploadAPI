@@ -54,7 +54,10 @@ namespace GraceUploadAPI.Components
         /// <param name="e"></param>
         protected virtual void AfterMyWorkStateChanged(object sender, EventArgs e) { }
         #endregion
-
+        /// <summary>
+        /// API發送資訊
+        /// </summary>
+        public APISetting APISetting { get; set; }
         /// <summary>
         /// 總通訊JSON物件
         /// </summary>
